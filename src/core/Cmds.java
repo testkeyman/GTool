@@ -42,6 +42,20 @@ public class Cmds {
 		cmdHeader[2]=adbPath+"devices";
 		executeCMD(cmdHeader);
 	}
+	/**Reboot the device by thread*/
+	public void rebootDevice(){
+		cmdHeader[2]=adbPath+"reboot";
+		Runnable temp=new Runnable() {
+			public void run() {
+				try {
+					p=cmd.exec(cmdHeader);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		};
+		temp.run();
+	}
 	public String executeCMD(String[]cmd1){
 		String ans="";
 		try {
@@ -63,6 +77,7 @@ public class Cmds {
 		
 		
 	}
+	/**copy file to sdcard*/
 	public String push(boolean isDirectory,String path,String name){
 		cmdHeader[2]=adbPath+"push "+path+" /sdcard/";
 		return executeCMD(cmdHeader);
@@ -70,4 +85,8 @@ public class Cmds {
 //	public static void main(String[] args) {
 //		new Cmds().detectADB();
 //	}
+	
+
 }
+
+

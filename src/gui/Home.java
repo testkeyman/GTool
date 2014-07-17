@@ -29,8 +29,16 @@ public class Home extends JFrame{
 	 */
 	private static final long serialVersionUID = -4731380524981415485L;
 	final JLabel note1=new JLabel("Choose the file or directory to transmit");
+	private final JLabel note2 = new JLabel("Your file or directory will be copyed to ");
+	private final JLabel note3=new JLabel("/sdcard/Gtool/Your file or directory name");
+	private final JLabel note4=new JLabel("set your adb path like:/opt/adt/platform-tools");
+	
+	final Font font1=new Font(null, Font.BOLD, 16);
+	final Font font2=new Font(null, Font.BOLD, 14);
+	
 	JTabbedPane pane=new JTabbedPane();
 	JPanel fileTransmit=new JPanel();
+	JPanel commandsPanel=new JPanel();
 	
 	public JTextArea consoleText=new JTextArea("");
 	JLabel path1;
@@ -39,18 +47,16 @@ public class Home extends JFrame{
 	JScrollPane console=new JScrollPane();
 	JFileChooser fileChooser=new JFileChooser();
 	JButton choose=new JButton("Choose");
-	JButton start=new JButton("start");
+	JButton start=new JButton("Start");
 	JButton choose2=new JButton("Choose Adb Path");
-	
+	JButton reboot=new JButton("Reboot");
 	Dimension   screensize   =   Toolkit.getDefaultToolkit().getScreenSize();   
 	Dimension   framesize; 
 	
 	TitledBorder titleBorder;
 	//adb path
 	String adbPath=null;
-	private final JLabel note2 = new JLabel("Your file or directory will be copyed to ");
-	private final JLabel note3=new JLabel("/sdcard/Gtool/Your file or directory name");
-	private final JLabel note4=new JLabel("set your adb path like:/opt/adt/platform-tools");
+	
 	
 	Cmds cmd=new Cmds();
 	public Home() {
@@ -58,6 +64,7 @@ public class Home extends JFrame{
 		setSize(400,500);
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
+		commandsPanelAdd();
 		filePanelAdd();
 		paneAdds();
 		consoleSetting();
@@ -68,9 +75,11 @@ public class Home extends JFrame{
 		moveToScreenCenter();
 		setVisible(true);
 	}
+	/**multiple panel settings*/
 	void paneAdds(){
 		
 		pane.addTab("File Transmit", fileTransmit);
+		pane.addTab("Commands", commandsPanel);
 	}
 	/**FileTransmitPanel adds and settings*/
 	void filePanelAdd(){
@@ -82,20 +91,20 @@ public class Home extends JFrame{
 				);
 		fileTransmit.setLayout(new BoxLayout(fileTransmit,BoxLayout.Y_AXIS ));
 		
-		note1.setFont(new Font(null, Font.PLAIN, 16));
+		note1.setFont(font1);
 		path1=new JLabel("You choose null ");
-		path1.setFont(new Font(null, Font.BOLD, 14));
+		path1.setFont(font2);
 		path1.setBorder(titleBorder);
 		path2=new JLabel("Your adb path didn't set");
-		path2.setFont(new Font(null, Font.BOLD, 14));
+		path2.setFont(font2);
 		path2.setBorder(titleBorder);
-		choose.setFont(new Font(null, Font.BOLD, 14));
-		start.setFont(new Font(null, Font.BOLD, 14));
+		choose.setFont(font2);
+		start.setFont(font2);
 //		path1.setLineWrap(true);
 //		path1.setRows(3);
-		note2.setFont(new Font(null, Font.PLAIN, 16));
-		note3.setFont(new Font(null, Font.PLAIN, 16));
-		note4.setFont(new Font(null, Font.PLAIN, 16));
+		note2.setFont(font1);
+		note3.setFont(font1);
+		note4.setFont(font1);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		//adb path set
 		choose2.addActionListener(new ActionListener() {
@@ -146,12 +155,25 @@ public class Home extends JFrame{
 		fileTransmit.add(note3);
 		fileTransmit.add(start);
 	}
+	/**CommandsPanel adds items*/
+	void commandsPanelAdd(){
+		reboot.setFont(font2);
+		reboot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consoleText.append("The device will reboot.Wait for a second.During this peroid,the device will lose signal.\n");
+				cmd.rebootDevice();
+			}
+		});
+		commandsPanel.add(reboot);
+	}
+	/**The console is on the bottom of the frame */
 	void consoleSetting(){
 		consoleText.setLineWrap(true);
 		console.setViewportView(consoleText);
 		console.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		console.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	}
+	
 	/**Move the frame to the Center of screen*/
 	void moveToScreenCenter(){
 		framesize=getSize();
