@@ -107,25 +107,30 @@ public class Home extends JFrame{
 					else{
 						adbPath=fileChooser.getSelectedFile().getPath();
 						System.out.println (adbPath);
-						cmd.setAdbPath(adbPath);
+//						cmd.setAdbPath(adbPath);
 						if(cmd.checkTheAdbPath())System.out.println("Good");
 						else JOptionPane.showMessageDialog(null,"Your adb path is wrong","Error", JOptionPane.ERROR_MESSAGE);
+						System.out.println("parent:"+fileChooser.getSelectedFile().getParent());
 						path2.setText(adbPath);
-						cmd.detectADB();
 					}
 					
 					}}});
 		//file or driectory set 
 		choose.addActionListener(new ActionListener() {
 			boolean isDirectory=false;
-			String path=null;
+			String path=null;String name=null;
 			public void actionPerformed(ActionEvent e) {
 				int returnVal = fileChooser.showOpenDialog(getParent());
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 					path=fileChooser.getSelectedFile().getPath();
+					//the file or the directory name
+					name=fileChooser.getSelectedFile().getParent();
+					name=path.substring(name.length()+1);
 					path1.setText(path);
 					isDirectory=fileChooser.getSelectedFile().isDirectory()?true:false;
-					if(cmd.push(isDirectory, path))System.out.println("Cpoy Successfully");
+					
+					if(cmd.push(isDirectory, path,name)!=null)System.out.println("Copy Successfully");
+					else System.out.println("Copy Failed!");
 		}
 				
 			}

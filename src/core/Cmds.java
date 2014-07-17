@@ -42,27 +42,30 @@ public class Cmds {
 		cmdHeader[2]=adbPath+"devices";
 		executeCMD(cmdHeader);
 	}
-	public boolean executeCMD(String[]cmd1){
+	public String executeCMD(String[]cmd1){
+		String ans="";
 		try {
 			p=cmd.exec(cmd1);
 			BufferedReader br=new BufferedReader(new InputStreamReader(p.getInputStream()));
 			String line=br.readLine();
 			while(line!=null){
-				System.out.println(line);
+//				System.out.println(line);
+				ans+=line+"\n";
 				line=br.readLine();
 			}
 			br.close();
-			return true;
+			return ans;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 		
 		
 	}
-	public boolean push(boolean isDirectory,String path){
-		return true;
+	public String push(boolean isDirectory,String path,String name){
+		cmdHeader[2]=adbPath+"push "+path+" /sdcard/";
+		return executeCMD(cmdHeader);
 	}
 //	public static void main(String[] args) {
 //		new Cmds().detectADB();
