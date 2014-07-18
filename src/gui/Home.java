@@ -79,6 +79,7 @@ public class Home extends JFrame{
 		getContentPane().add(console);
 //		console.setLocation(0, getSize().height/2);
 		moveToScreenCenter();
+		setDefaultCloseOperation(3);
 		setVisible(true);
 	}
 	/**multiple panel settings*/
