@@ -42,6 +42,15 @@ public class Cmds {
 		cmdHeader[2]=adbPath+"devices";
 		executeCMD(cmdHeader);
 	}
+	/**mkdir */
+	public String  mkdir(){
+//		cmdHeader[2]=adbPath+"mkdir /sdcard/GToolSwap";
+		cmdHeader[2]=adbPath+"shell";
+		executeCMD(cmdHeader);
+		cmdHeader[2]="mkdir /sdacrd/GT";
+		return executeCMD(cmdHeader);
+//		return executeCMD(cmdHeader);
+	}
 	/**Reboot the device by thread*/
 	public void rebootDevice(){
 		cmdHeader[2]=adbPath+"reboot";
