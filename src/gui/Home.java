@@ -125,7 +125,7 @@ public class Home extends JFrame{
 						cmd.setAdbPath(adbPath);
 						if(cmd.checkTheAdbPath()){
 							consoleText.append("Setting successful!\n");
-//							System.out.println(cmd.mkdir());
+							System.out.println(cmd.mkdir());
 						}
 						else JOptionPane.showMessageDialog(null,"Your adb path is wrong","Error", JOptionPane.ERROR_MESSAGE);
 //						System.out.println("parent:"+fileChooser.getSelectedFile().getParent());

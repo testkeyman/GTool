@@ -44,12 +44,8 @@ public class Cmds {
 	}
 	/**mkdir */
 	public String  mkdir(){
-//		cmdHeader[2]=adbPath+"mkdir /sdcard/GToolSwap";
-		cmdHeader[2]=adbPath+"shell";
-		executeCMD(cmdHeader);
-		cmdHeader[2]="mkdir /sdacrd/GT";
+		cmdHeader[2]=adbPath+"shell mkdir /sdcard/GToolSwap";
 		return executeCMD(cmdHeader);
-//		return executeCMD(cmdHeader);
 	}
 	/**Reboot the device by thread*/
 	public void rebootDevice(){
@@ -88,7 +84,7 @@ public class Cmds {
 	}
 	/**copy file to sdcard*/
 	public String push(boolean isDirectory,String path,String name){
-		cmdHeader[2]=adbPath+"push "+path+" /sdcard/";
+		cmdHeader[2]=adbPath+"push "+path+" /sdcard/GToolSwap/";
 		return executeCMD(cmdHeader);
 	}
 //	public static void main(String[] args) {
