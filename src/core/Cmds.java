@@ -87,6 +87,11 @@ public class Cmds {
 		cmdHeader[2]=adbPath+"push "+path+" /sdcard/GToolSwap/";
 		return executeCMD(cmdHeader);
 	}
+	/**copy files from sdcard*/
+	public String pull(String path){
+		cmdHeader[2]=adbPath+"pull"+" /sdcard/GToolSwap/ " +path;
+		return executeCMD(cmdHeader);
+	}
 //	public static void main(String[] args) {
 //		new Cmds().detectADB();
 //	}
